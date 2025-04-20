@@ -1,0 +1,21 @@
+{
+  "name": "express-route-tester",
+  "version": "1.0.0",
+  "description": "A CLI tool for testing Express.js routes",
+  "Author": {
+    "name": "Oliver Ikegah",
+    "email": "oliverikegah@gmail.com"
+  },
+  "bin": {
+    "express-route-tester": "./bin/cli.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^10.0.1",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.0"
+  }
+}
