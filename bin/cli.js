@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import path from "path";
-import { pathToFileURL } from "url"; // Import pathToFileURL
+import { pathToFileURL } from "url";
 import { scanRoutes, detectConflicts } from "../src/scanner.js";
 import {
   printRoutes,
@@ -21,9 +21,8 @@ program
   .option("--dry-run", "Perform a dry-run test on all routes")
   .action(async (file, options) => {
     try {
-      // Resolve the file path to an absolute path
       const resolvedFilePath = path.resolve(file);
-      const fileUrl = pathToFileURL(resolvedFilePath).href; // Convert to file:// URL
+      const fileUrl = pathToFileURL(resolvedFilePath).href;
 
       const results = await scanRoutes(resolvedFilePath);
       printRoutes(results);
@@ -37,9 +36,15 @@ program
         console.log("\n✅ No route conflicts detected.");
       }
 
+      // Display warnings for missing auth middleware
+      if (results.warnings.length > 0) {
+        console.log("\n⚠️ Security Warnings:");
+        results.warnings.forEach((warning) => console.log(`- ${warning}`));
+      }
+
       // Perform dry-run testing if the --dry-run option is provided
       if (options.dryRun) {
-        const app = (await import(fileUrl)).default; // Use fileUrl for import
+        const app = (await import(fileUrl)).default;
         const routesForDryRun = results.routes
           .map(({ methods, path }) =>
             methods.map((method) => ({ method, path }))

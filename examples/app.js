@@ -26,4 +26,12 @@ app.post('/movies', function createAnotherMovie(req, res) {
   res.send('Create another movie');
 });
 
+app.get('/admin', function adminRoute(req, res) {
+  res.send('Admin panel');
+});
+
+app.delete('/delete', function deleteRoute(req, res) {
+  res.send('Delete operation');
+});
+
 export default app;

@@ -10,6 +10,7 @@ A powerful CLI tool for testing and analyzing Express.js routes in your Node.js 
 - 📊 **Export Capabilities**: Export results to JSON or Markdown format
 - 🔄 **Middleware Analysis**: Shows middleware attached to each route
 - 📝 **Detailed Reporting**: Comprehensive information about routes, methods, and middleware
+- 🔐 **Security/auth checks**: Warns if sensitive routes (e.g., `/admin`, `/delete`) lack authentication middleware.
 
 ## Prerequisites
 
