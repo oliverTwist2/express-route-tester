@@ -9,7 +9,7 @@ This checklist outlines advanced features to implement, organized by skill level
 #### 🔹 High Impact
 
 - [x] 🔐 **Security/auth checks** — Warn if sensitive routes (e.g., `/admin`, `/delete`) lack authentication middleware.
-- [ ] 🧪 **CI/CD mode** — Add `--ci` flag to output JSON and fail gracefully when issues are detected.
+- [x] 🧪 **CI/CD mode** — Add `--ci` flag to output JSON and fail gracefully when issues are detected.
 
 #### 🔹 Medium Impact
 

@@ -15,23 +15,27 @@ A powerful CLI tool for testing and analyzing Express.js routes in your Node.js 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js (v14 or higher)
 - npm (v6 or higher)
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/oliverikegah/express-route-tester.git
 cd express-route-tester
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Install the package globally (optional):
+
 ```bash
 npm install -g .
 ```
@@ -45,6 +49,7 @@ npx express-route-tester <path-to-your-express-app>
 ```
 
 Example:
+
 ```bash
 npx express-route-tester ./examples/app.js
 ```
@@ -55,12 +60,14 @@ The tool supports the following command-line options:
 
 - `-o, --output <file>`: Export results to a file (supports .json or .md format)
 - `--dry-run`: Perform a dry-run test on all routes
+- `--ci`: Run in CI/CD mode. Outputs results in JSON format and exits with a non-zero status code if issues are detected.
 - `-h, --help`: Display help information
 - `-v, --version`: Display version information
 
 ### Example Output
 
 When you run the tool, it will:
+
 1. Scan your Express application for routes
 2. Display all detected routes with their methods and middleware
 3. Check for route conflicts
@@ -94,6 +101,7 @@ express-route-tester/
 ## Example Application
 
 The project includes an example Express application (`examples/app.js`) that demonstrates:
+
 - Basic route definitions
 - Middleware usage
 - Route conflicts (for testing conflict detection)
@@ -107,14 +115,19 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 1. Fork the repository
 2. Clone your fork:
+
 ```bash
 git clone https://github.com/your-username/express-route-tester.git
 ```
+
 3. Install dependencies:
+
 ```bash
 npm install
 ```
+
 4. Create a new branch for your feature:
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
@@ -122,6 +135,7 @@ git checkout -b feature/your-feature-name
 ### Roadmap
 
 Check out our [todo.md](todo.md) file for planned features and enhancements, including:
+
 - Security/auth checks
 - CI/CD mode
 - Tag-based filtering
@@ -129,7 +143,6 @@ Check out our [todo.md](todo.md) file for planned features and enhancements, inc
 - Route coverage detection
 - OpenAPI export
 - And more!
-
 
 ## Author
 
@@ -143,6 +156,7 @@ Check out our [todo.md](todo.md) file for planned features and enhancements, inc
 ## Support
 
 If you encounter any issues or have questions, please:
+
 1. Check the [Issues](https://github.com/oliverikegah/express-route-tester/issues) page
 2. Create a new issue if your problem isn't already listed
-3. Contact the author directly for urgent matters 
+3. Contact the author directly for urgent matters
