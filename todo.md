@@ -22,8 +22,8 @@ This checklist outlines advanced features to implement, organized by skill level
 
 #### 🔹 High Impact
 
-- [ ] 📊 **Route coverage detection** — Detect unused middleware or routes without middleware coverage.
-- [ ] 📄 **OpenAPI export** — Generate `.yaml` or `.json` docs for Swagger compatibility.
+- [x] 📊 **Route coverage detection** — Detect unused middleware or routes without middleware coverage.
+- [x] 📄 **OpenAPI export** — Generate `.yaml` or `.json` docs for Swagger compatibility.
 
 #### 🔹 Medium–High Impact
 

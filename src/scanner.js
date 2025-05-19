@@ -1,8 +1,8 @@
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 
-const SENSITIVE_ROUTES = ["/admin", "/delete"]; // Define sensitive routes
-const AUTH_MIDDLEWARE_NAMES = ["authenticate", "isAuthenticated", "auth"]; // Common auth middleware names
+const SENSITIVE_ROUTES = ["/admin", "/delete"];
+const AUTH_MIDDLEWARE_NAMES = ["authenticate", "isAuthenticated", "auth"];
 
 export async function scanRoutes(filePath) {
   const fullPath = path.resolve(filePath);
@@ -10,11 +10,11 @@ export async function scanRoutes(filePath) {
 
   const globalMiddleware = [];
   const routes = [];
-  const warnings = []; // Collect warnings for missing auth middleware
+  const warnings = [];
+  const middlewareUsage = new Set();
 
   app._router.stack.forEach((layer) => {
     if (layer.name === "router") {
-      // Nested routers, optional handling
       return;
     }
 
@@ -27,6 +27,9 @@ export async function scanRoutes(filePath) {
         m.toUpperCase()
       );
       const handlers = layer.route.stack.map((l) => l.name || "anonymous");
+
+      // Track middleware usage for coverage
+      handlers.forEach((h) => middlewareUsage.add(h));
 
       // Check for missing auth middleware on sensitive routes
       if (SENSITIVE_ROUTES.includes(path)) {
@@ -44,10 +47,27 @@ export async function scanRoutes(filePath) {
     }
   });
 
-  return { globalMiddleware, routes, warnings };
+  // Detect unused middleware
+  const unusedMiddleware = globalMiddleware.filter(
+    (mw) => !middlewareUsage.has(mw)
+  );
+
+  // Detect routes without middleware (only one handler)
+  const routesWithoutMiddleware = routes
+    .filter((route) => route.handlers.length <= 1)
+    .map((route) => `${route.methods.join(", ")} ${route.path}`);
+
+  return {
+    globalMiddleware,
+    routes,
+    warnings,
+    coverage: {
+      unusedMiddleware,
+      routesWithoutMiddleware,
+    },
+  };
 }
 
-// Export detectConflicts
 export function detectConflicts(routes) {
   const seen = new Map();
   const conflicts = [];

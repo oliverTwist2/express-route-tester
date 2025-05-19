@@ -1,4 +1,4 @@
-# Express Route Tester
+# Express Route Tester - Route-Pilot
 
 A powerful CLI tool for testing and analyzing Express.js routes in your Node.js applications. This tool helps developers inspect, test, and validate their Express.js route configurations with ease.
 
@@ -12,46 +12,27 @@ A powerful CLI tool for testing and analyzing Express.js routes in your Node.js 
 - 📝 **Detailed Reporting**: Comprehensive information about routes, methods, and middleware
 - 🔐 **Security/auth checks**: Warns if sensitive routes (e.g., `/admin`, `/delete`) lack authentication middleware.
 
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-
 ## Installation
 
-1. Clone the repository:
+Install the package globally using npm:
 
 ```bash
-git clone https://github.com/oliverikegah/express-route-tester.git
-cd express-route-tester
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Install the package globally (optional):
-
-```bash
-npm install -g .
+npm install -g route-pilot
 ```
 
 ## Usage
 
 ### Basic Usage
+Run the CLI tool with the path to your Express app:
 
 ```bash
-npx express-route-tester <path-to-your-express-app>
+route-pilot <path-to-your-express-app>
 ```
 
 Example:
 
 ```bash
-npx express-route-tester ./examples/app.js
+route-pilot app.js
 ```
 
 ### Command Line Options
@@ -63,6 +44,7 @@ The tool supports the following command-line options:
 - `--ci`: Run in CI/CD mode. Outputs results in JSON format and exits with a non-zero status code if issues are detected.
 - `-h, --help`: Display help information
 - `-v, --version`: Display version information
+- `-openapi <file>`: Export OpenAPI (Swagger) spec to .json or .yaml
 
 ### Example Output
 
@@ -113,7 +95,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ### Development Setup
 
-1. Fork the repository
+1. Fork the repository [Github Repo](https://github.com/oliverTwist2/express-route-tester)
 2. Clone your fork:
 
 ```bash
@@ -151,12 +133,11 @@ Check out our [todo.md](todo.md) file for planned features and enhancements, inc
 ## Acknowledgments
 
 - Express.js team for their excellent framework
-- All contributors who help improve this tool
 
 ## Support
 
 If you encounter any issues or have questions, please:
 
-1. Check the [Issues](https://github.com/oliverikegah/express-route-tester/issues) page
+1. Check the [Issues](https://github.com/oliverikegah/express-route-tester/issues) page on github
 2. Create a new issue if your problem isn't already listed
 3. Contact the author directly for urgent matters

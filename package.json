@@ -1,6 +1,6 @@
 {
-  "name": "express-route-tester",
-  "version": "1.0.0",
+  "name": "route-pilot",
+  "version": "1.0.2",
   "description": "A CLI tool for testing Express.js routes",
   "Author": {
     "name": "Oliver Ikegah",
@@ -10,12 +10,20 @@
     "express-route-tester": "./bin/cli.js"
   },
   "type": "module",
+  "keywords": [
+    "express",
+    "cli",
+    "routes",
+    "testing"
+  ],
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^10.0.1",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
     "supertest": "^7.1.0"
-  }
+  },
+  "license": "MIT"
 }

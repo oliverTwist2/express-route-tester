@@ -9,7 +9,7 @@ import {
   printHelp,
   printVersion,
 } from "../src/reporter.js";
-import { exportToFile } from "../src/utils.js";
+import { exportToFile, exportOpenAPI } from "../src/utils.js";
 import { dryRunRoutes } from "../dryRunner.js";
 
 const program = new Command();
@@ -20,6 +20,7 @@ program
   .option("-o, --output <file>", "Output file path (JSON or Markdown)")
   .option("--dry-run", "Perform a dry-run test on all routes")
   .option("--ci", "Run in CI/CD mode and output JSON results")
+  .option("--openapi <file>", "Export OpenAPI (Swagger) spec to .json or .yaml")
   .action(async (file, options) => {
     try {
       const resolvedFilePath = path.resolve(file);
@@ -62,6 +63,27 @@ program
         results.warnings.forEach((warning) => console.log(`- ${warning}`));
       }
 
+      // Route coverage detection output
+      if (results.coverage) {
+        if (results.coverage.unusedMiddleware.length > 0) {
+          console.log("\n🟠 Unused Global Middleware:");
+          results.coverage.unusedMiddleware.forEach((mw) =>
+            console.log(`- ${mw}`)
+          );
+        } else {
+          console.log("\n✅ All global middleware is used by at least one route.");
+        }
+
+        if (results.coverage.routesWithoutMiddleware.length > 0) {
+          console.log("\n🟡 Routes Without Middleware:");
+          results.coverage.routesWithoutMiddleware.forEach((route) =>
+            console.log(`- ${route}`)
+          );
+        } else {
+          console.log("\n✅ All routes have middleware coverage.");
+        }
+      }
+
       if (options.dryRun) {
         const app = (await import(fileUrl)).default;
         const routesForDryRun = results.routes
@@ -75,6 +97,11 @@ program
       if (options.output) {
         await exportToFile(results, conflicts, options.output);
         console.log(`\n📁 Results exported to ${options.output}`);
+      }
+
+      if (options.openapi) {
+        await exportOpenAPI(results, options.openapi);
+        console.log(`\n📄 OpenAPI spec exported to ${options.openapi}`);
       }
 
       printHelp();
